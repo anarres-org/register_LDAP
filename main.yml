@@ -1,0 +1,60 @@
+---
+# main playbook file for register_LDAP
+
+- name: Register user in the LDAP server
+  hosts: all
+  become: false
+  vars:
+    user_name:
+    surname:
+    full_name: "{{ user_name }}  {{ surname }}"
+    nick:
+    password:
+    email:
+    gid:
+    server_uri:
+    validate_certs: true
+    base_DN:
+    bind_DN:
+    bind_credentials:
+    home_directory:
+  pre_tasks:
+    - name: Get highest uid
+      shell: "set -o pipefail && getent passwd | grep -v nobody | awk -F : '$3>h{h=$3;u=$1}END{print h}'"
+      args:
+        executable: /bin/bash
+      register: uid_result
+      when: uid is not defined
+      notify: Set uid
+
+    - name: Run handlers
+      meta: flush_handlers
+    - name: Show uid
+      debug:
+        var: uid
+  tasks:
+    - name: Register user in the LDAP server
+      ldap_entry:
+        dn: "cn={{ full_name }},ou=users,{{ base_DN }}"
+        objectClass:
+          - inetOrgPerson
+          - posixAccount
+          - top
+        server_uri: "{{ openldap_server_uri }}"
+        start_tls: false
+        validate_certs: "{{ testing is undefined and validate_certs }}"
+        bind_dn: "{{ bind_DN }}"
+        bind_pw: "{{ bind_credentials }}"
+        attributes:
+          userPassword: "{{ password }}"
+          mail: "{{ email }}"
+          gidNumber: "{{ gid }}"
+          givenName: "{{ user_name }}"
+          sn: "{{ surname }}"
+          homeDirectory: "{{ home_directory }}"
+          uidNumber: "{{ uid }}"
+          uid: "{{ nick }}"
+  handlers:
+    - name: Set uid
+      set_fact:
+        uid: "{{ uid_result.stdout | int + 1 }}"

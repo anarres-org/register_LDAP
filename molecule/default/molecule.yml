@@ -1,0 +1,79 @@
+---
+dependency:
+  name: galaxy
+  enabled: false
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: stretch
+    box: debian/stretch64
+    interfaces:
+      - network_name: private_network
+        auto_config: true
+        ip: 172.16.100.12
+        type: static
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../../main.yml
+  options:
+    extra-vars:
+      testing: true
+      data_path: /data
+      base_domain: anarres.local
+      nginx_processes: auto
+      web_ports_http: 80
+      web_ports_https: 443
+      web_path: /var/www
+      web_path_letsencrypt: "{{ web_path }}/letsencrypt"
+      web_path_default: "{{ web_path }}/default"
+      openldap_domain: "{{ base_domain }}"
+      openldap_docker_image: osixia/openldap:1.2.3
+      openldap_port_secure: 636
+      openldap_directory:
+        data: "{{ data_path }}/openldap/data"
+        conf: "{{ data_path }}/openldap/conf"
+      openldap_organization: anarres
+      openldap_base_DN: dc=anarres,dc=local
+      openldap_admin_password: changeme
+      openldap_readonly_password: changeme
+      openldap_server_protocol: 'ldaps://'
+      openldap_server_domain: "{{ base_domain }}"
+      openldap_server_port: 636
+      openldap_server_uri: "{{ openldap_server_protocol }}{{ openldap_server_domain }}:{{ openldap_server_port }}"
+      openldap_validate_certs: true
+      openldap_binddn: "cn=readonly,{{ openldap_base_DN }}"
+      openldap_bindcredentials: "{{ openldap_readonly_password }}"
+      openldap_searchbase: "ou=users,{{ openldap_base_DN }}"
+      phpldapadmin_domain: "ldap.{{ base_domain }}"
+      phpldapadmin_docker_image: osixia/phpldapadmin:0.7.2
+      phpldapadmin_internal_web_port: 4002
+      phpldapadmin_ldap_hosts: "#PYTHON2BASH:[{'openldap': [{'server': [{'tls': True}]},{'login': [{'bind_id': 'cn=admin,{{ openldap_base_DN }}'}]}]}]"
+      user_name: John
+      surname: Doe
+      full_name: "{{ user_name }}  {{ surname }}"
+      nick: johndoe
+      password: changeme
+      email: j.doe@anarres.local
+      gid: 500
+      server_uri: "{{ openldap_server_uri }}"
+      base_DN: "{{ openldap_base_DN }}"
+      bind_DN: "cn=admin,{{ openldap_base_DN }}"
+      bind_credentials: "{{ openldap_admin_password }}"
+      home_directory: "/home/users/{{ nick }}"
+  env:
+    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH:-../../../../roles}
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  options:
+    sudo: true
+  lint:
+    name: flake8
