@@ -8,6 +8,9 @@ driver:
     name: virtualbox
 lint:
   name: yamllint
+  options:
+    config-data:
+      ignore: roles
 platforms:
   - name: stretch
     box: debian/stretch64
@@ -65,10 +68,11 @@ provisioner:
       bind_DN: "cn=admin,{{ openldap_base_DN }}"
       bind_credentials: "{{ openldap_admin_password }}"
       home_directory: "/home/users/{{ nick }}"
-  env:
-    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH:-../../../../roles}
   lint:
     name: ansible-lint
+    options:
+      exclude:
+        - roles/
 scenario:
   name: default
 verifier:
