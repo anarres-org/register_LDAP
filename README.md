@@ -1,33 +1,43 @@
-# Project Name
+# Register LDAP
 
-A brief description of the project goes here.
+An [ansible](https://github.com/ansible) playbook to register a user in an LDAP
+server.
 
 ## Compatibility
 
-Compatible GNU/Linux distributions and version. On which distros is it tested?
+These are the tested GNU/Linux distributions. Probably it works with any
+distribution.
+
+* [debian](https://www.debian.org/)
+  * stretch
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the project
-should be mentioned here. For instance, if the project uses the EC2 module, it
-may be a good idea to mention in this section that the boto package is
-required.
+* `python`
 
 ## Role Variables
 
-A description of the settable variables for this project should go here,
-including any variables that are in defaults/main.yml, vars/main.yml, and any
-variables that can/should be set via parameters to the project. Any variables
-that are read from other roles and/or the global scope (ie. hostvars, group
-vars, etc.) should be mentioned here as well.
+* `user_name`: Name of the user (eg. `John`).
+* `surname`: Surname of the user (eg. `Doe`).
+* `full_name`: Name and surname of the user (eg. `John Doe`).
+* `nick`: Nickname of the user.
+* `password`: Password for the user.
+* `email`: Email account of the user.
+* `gid`: Linux group ID for the user.
+* `server_uri`: LDAP server uri (eg. `ldaps://anarres.local:636`).
+* `validate_certs`: (Default: `true`) Boolean value for validating or not the
+   LDAP server's certificates.
+* `users_base_DN`: Base DN of the LDAP server where the user will be created (eg.
+  `ou=users,dc=anarres,dc=local`).
+* `bind_DN`: Bind DN to use to login to the LDAP server (eg.
+  `cn=admin,dc=anarres,dc=local`).
+* `bind_credentials`: Password for that account.
+* `home_directory`: Path of the home directory of the new user (eg.
+  `/home/users/john`).
 
 ## Dependencies
 
-A list of other roles should go here, plus any details in regards to parameters
-that may need to be set for other roles, or variables that are used from other
-roles.
-
-
+None.
 
 ## Testing
 
@@ -44,5 +54,4 @@ GPLv3
 
 ## Author Information
 
-An optional section for the project authors to include contact information, or a
-website (HTML is not allowed).
+* **m0wer**: m0wer (at) autistici.org
