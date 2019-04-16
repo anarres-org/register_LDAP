@@ -4,20 +4,6 @@
 - name: Register user in the LDAP server
   hosts: all
   become: false
-  vars:
-    user_name:
-    surname:
-    full_name: "{{ user_name }}  {{ surname }}"
-    nick:
-    password:
-    email:
-    gid:
-    server_uri:
-    validate_certs: true
-    base_DN:
-    bind_DN:
-    bind_credentials:
-    home_directory:
   pre_tasks:
     - name: Get highest uid
       shell: "set -o pipefail && getent passwd | grep -v nobody | awk -F : '$3>h{h=$3;u=$1}END{print h}'"
@@ -35,7 +21,7 @@
   tasks:
     - name: Register user in the LDAP server
       ldap_entry:
-        dn: "cn={{ full_name }},ou=users,{{ base_DN }}"
+        dn: "cn={{ full_name }},{{ users_base_DN }}"
         objectClass:
           - inetOrgPerson
           - posixAccount

@@ -61,7 +61,7 @@ provisioner:
       email: j.doe@anarres.local
       gid: 500
       server_uri: "{{ openldap_server_uri }}"
-      base_DN: "{{ openldap_base_DN }}"
+      users_base_DN: "ou=users,{{ openldap_base_DN }}"
       bind_DN: "cn=admin,{{ openldap_base_DN }}"
       bind_credentials: "{{ openldap_admin_password }}"
       home_directory: "/home/users/{{ nick }}"

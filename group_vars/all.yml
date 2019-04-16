@@ -1,2 +1,16 @@
 ---
 # group_vars file for register_LDAP
+
+user_name:
+surname:
+full_name: "{{ user_name }}  {{ surname }}"
+nick:
+password:
+email:
+gid:
+server_uri:
+validate_certs: true
+base_DN:
+bind_DN:
+bind_credentials:
+home_directory:
