@@ -10,8 +10,13 @@
       args:
         executable: /bin/bash
       register: uid_result
+      changed_when: false
       when: uid is not defined
-      notify: Set uid
+
+    - name: Set uid
+      set_fact:
+        uid: "{{ uid_result.stdout | int + 1 }}"
+      when: uid is not defined
 
     - name: Run handlers
       meta: flush_handlers
@@ -40,7 +45,3 @@
           homeDirectory: "{{ home_directory }}"
           uidNumber: "{{ uid }}"
           uid: "{{ nick }}"
-  handlers:
-    - name: Set uid
-      set_fact:
-        uid: "{{ uid_result.stdout | int + 1 }}"
