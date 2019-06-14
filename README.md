@@ -14,6 +14,7 @@ distribution.
 ## Requirements
 
 * `python`
+* `ldap-utils`
 
 ## Role Variables
 
@@ -34,6 +35,8 @@ distribution.
 * `bind_credentials`: Password for that account.
 * `home_directory`: Path of the home directory of the new user (eg.
   `/home/users/john`).
+* `get_highest_uid_command`: Shell command to get the highest uidNumber from
+  the already registered user in the LDAP server.
 
 ## Dependencies
 
