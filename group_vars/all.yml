@@ -14,3 +14,5 @@ base_DN:
 bind_DN:
 bind_credentials:
 home_directory:
+
+get_highest_uid_command: "ldapsearch -H {{ server_uri }} -D '{{ bind_DN }}' -b '{{ users_base_DN }}' -w '{{ bind_credentials }}' | awk '/uidNumber: / {print $2}' | sort | tail -n 1"
