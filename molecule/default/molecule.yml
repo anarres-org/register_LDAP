@@ -68,6 +68,7 @@ provisioner:
       bind_DN: "cn=admin,{{ openldap_base_DN }}"
       bind_credentials: "{{ openldap_admin_password }}"
       home_directory: "/home/users/{{ nick }}"
+      get_highest_uid_command: "LDAPTLS_REQCERT=never ldapsearch -H {{ server_uri }} -D '{{ bind_DN }}' -b '{{ users_base_DN }}' -w '{{ bind_credentials }}' | awk '/uidNumber: / {print $$2}' | sort | tail -n 1"
   lint:
     name: ansible-lint
     options:

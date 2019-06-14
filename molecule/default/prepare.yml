@@ -228,3 +228,13 @@
     - role: add_nginx_proxy_conf
       tags: proxy
   tags: phpldapadmin
+
+- name: '[Pretask] Install LDAP utils'
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Install requiered packages
+      package:
+        name: ldap-utils
+        state: present
