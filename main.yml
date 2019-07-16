@@ -4,6 +4,7 @@
 - name: Register user in the LDAP server
   hosts: all
   become: false
+  gather_facts: false
   pre_tasks:
     - name: Get highest uid
       shell: "set -o pipefail && {{ get_highest_uid_command }}"
