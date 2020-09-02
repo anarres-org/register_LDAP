@@ -24,6 +24,7 @@ provisioner:
     converge: ../../main.yml
   options:
     extra-vars:
+      ansible_python_interpreter: /usr/bin/python3
       testing: true
       data_path: /data
       base_domain: anarres.local
