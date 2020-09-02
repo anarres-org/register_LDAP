@@ -28,6 +28,7 @@
     - name: Install docker via pip
       pip:
         name: docker
+        extra_args: --upgrade
   roles:
     - role: docker
 
