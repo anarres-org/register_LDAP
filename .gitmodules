@@ -1,6 +1,3 @@
-[submodule "roles/docker"]
-	path = molecule/default/roles/docker
-	url = https://git.digitales.cslabrecha.org/ansible-roles/docker
 [submodule "roles/generic_docker_systemd"]
 	path = molecule/default/roles/generic_docker_systemd
 	url = https://github.com/anarres-org/generic_docker_systemd
@@ -13,3 +10,6 @@
 [submodule "molecule/default/roles/letsencrypt_request"]
 	path = molecule/default/roles/letsencrypt_request
 	url = https://github.com/anarres-org/letsencrypt_request
+[submodule "molecule/default/roles/docker"]
+	path = molecule/default/roles/docker
+	url = https://github.com/anarres-org/docker
