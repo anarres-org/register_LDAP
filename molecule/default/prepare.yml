@@ -71,8 +71,8 @@
         group: www-data
         mode: "u=rwx,g=r,o="
   roles:
-    - role: letsencrypt-request
-    - role: anarres-nginx
+    - role: letsencrypt_request
+    - role: anarres_nginx
 
 ## OpenLDAP
 
@@ -85,7 +85,7 @@
     domain: "{{ openldap_domain }}"
     letsencrypt_renew_hook: /usr/sbin/service docker.openldap restart
   roles:
-    - role: letsencrypt-request
+    - role: letsencrypt_request
       tags: letsecrypt_request
   tags: openldap
 
@@ -213,7 +213,7 @@
     domain: "{{ phpldapadmin_domain }}"
     letsencrypt_renew_hook: /usr/sbin/service nginx reload
   roles:
-    - role: letsencrypt-request
+    - role: letsencrypt_request
       tags: letsecrypt_request
   tags: phpldapadmin
 
