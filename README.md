@@ -47,6 +47,13 @@ None.
 To test the project you need [molecule](http://molecule.readthedocs.io/en/latest/)
 .
 
+The testing dependencies are included as submoudules in
+*molecule/dafault/roles/*. To fetch them automatically when cloning, use:
+
+```bash
+git clone --recurse-submodules -j10 [repo]
+```
+
 ```bash
 molecule test
 ```
