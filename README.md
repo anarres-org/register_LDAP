@@ -9,7 +9,7 @@ These are the tested GNU/Linux distributions. Probably it works with any
 distribution.
 
 * [debian](https://www.debian.org/)
-  * stretch
+  * buster
 
 ## Requirements
 
@@ -57,4 +57,4 @@ GPLv3
 
 ## Author Information
 
-* **m0wer**: m0wer (at) autistici.org
+* **m0wer**: m0wer (at) autistici (dot) org

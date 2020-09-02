@@ -1,15 +1,15 @@
 [submodule "roles/docker"]
 	path = molecule/default/roles/docker
 	url = https://git.digitales.cslabrecha.org/ansible-roles/docker
-[submodule "roles/letsencrypt-request"]
-	path = molecule/default/roles/letsencrypt-request
-	url = https://github.com/anarres-org/letsencrypt-request
-[submodule "roles/anarres-nginx"]
-	path = molecule/default/roles/anarres-nginx
-	url = https://github.com/anarres-org/anarres-nginx
 [submodule "roles/generic_docker_systemd"]
 	path = molecule/default/roles/generic_docker_systemd
 	url = https://github.com/anarres-org/generic_docker_systemd
 [submodule "roles/add_nginx_proxy_conf"]
 	path = molecule/default/roles/add_nginx_proxy_conf
 	url = https://github.com/anarres-org/add_nginx_proxy_conf
+[submodule "molecule/default/roles/anarres_nginx"]
+	path = molecule/default/roles/anarres_nginx
+	url = https://github.com/anarres-org/anarres_nginx
+[submodule "molecule/default/roles/letsencrypt_request"]
+	path = molecule/default/roles/letsencrypt_request
+	url = https://github.com/anarres-org/letsencrypt_request
