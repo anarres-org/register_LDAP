@@ -3,6 +3,7 @@
 extends: default
 
 ignore: |
+  custom/
   roles/
   molecule/
   library/
