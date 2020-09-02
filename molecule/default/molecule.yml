@@ -54,7 +54,7 @@ provisioner:
       phpldapadmin_domain: "ldap.{{ base_domain }}"
       phpldapadmin_docker_image: osixia/phpldapadmin:0.7.2
       phpldapadmin_internal_web_port: 4002
-      phpldapadmin_ldap_hosts: "#PYTHON2BASH:[{'openldap': [{'server': [{'tls': True}]},{'login': [{'bind_id': 'cn=admin,{{ openldap_base_DN }}'}]}]}]"
+      #phpldapadmin_ldap_hosts: "#PYTHON2BASH:[{'openldap': [{'server': [{'tls': True}]},{'login': [{'bind_id': 'cn=admin,{{ openldap_base_DN }}'}]}]}]"
       user_name: John
       surname: Doe
       full_name: "{{ user_name }}  {{ surname }}"
